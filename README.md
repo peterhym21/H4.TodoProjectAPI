@@ -1,5 +1,9 @@
 # TODO
 
+This Project is made to Train My skills in API, OAuth And OpenID
+
+<br>
+
 
 ## Technical Details
 
@@ -11,6 +15,11 @@
 |*Todo.WebAPI*|* .Net 6.0*|*FBF*|
 |*Service*|*.Net 6.0*|*FBT*|
 |*Repository*|*.Net 6.0*|*FBT*| 
+
+<br>
+
+
+### API Overview
 
 
 | API                      | Description                      | Request body | Response body        |
@@ -24,6 +33,8 @@
 | `DELETE /todoitems/{id}` | Delete an item                   | None         | None                 |
 
 
+<br>
+
 
 ### Technologies and prerequisites
 
@@ -36,7 +47,11 @@
 - Basic knowledge of VSTS, GIT and LINQ
 
 
+<br>
+
+
 ## Use of third party libraries
+
 
 ### Todo.WebAPI
 | Name                                                 | Version |
@@ -44,6 +59,10 @@
 | Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore | 6.0.2   |
 | Microsoft.EntityFrameworkCore.InMemory               | 6.0.2   |
 | Swashbuckle.AspNetCore                               | 6.2.3   |
+
+
+<br>
+
 
 ## Responsible People  
 
