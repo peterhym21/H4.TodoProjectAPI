@@ -5,6 +5,26 @@ This Project is made to Train My skills in API, OAuth And OpenID
 <br>
 
 
+
+## Krav
+
+
+- [X] En Index forside (der kan fortælle lidt om projektet - og som altid vil tillade anonym adgang)
+- [X] En TodoItems side der viser alle TodoItems , der ikke er udført
+- [ ] Klikker man på et TodoItems Description, åbnes emnet på en ny Page. Her er mulighed for at redigere Description, Completed og Priority. Der er lavet validering af brugerdata. 
+  - [X] (Har en Edit knap med en edit side)
+- [X] Desuden skal man kunne slette emnet og der skal gerne kræves en godkendelse inden emnet slettes.
+- [X] På forsiden skal der være en mulighed for at oprette et nyt TodoItem. Der er lavet validering af brugerdata. Som en ekstra option kan man lave formen som en Modal form.
+- [X] Når man klikker på et TodoItems Checkbox for at markere at et TodoItem er udført, fjernes emnet fra forsiden (SoftDelete). Tip: Named PageHandlers
+  - [X] (kan man i hvert fald ændre i Edit page) 
+- [X] Der er lavet en TodoService, som injectes med DI
+- [X] Applikationenens konstanter, som f.eks. URL's og andet er angivet i en AppConstants klasse
+- [X] Der laves en ReadMe til projektet, der bl.a. markerer hvilke krav der er opfyldt
+
+<br>
+
+
+
 ## Technical Details
 
 **FBT** : Folder By Type  
@@ -12,7 +32,8 @@ This Project is made to Train My skills in API, OAuth And OpenID
 
 |Project Name|Language|Folder Structure|
 |-|-|-|
-|*TodoWebAPI*|* ASP.Net API 6.0*|*FBT*|
+|*TodoWebAPI*|* ASP.Net Core Web API, .NET 6.0*|*FBT*|
+|*TodoWebClient*|* ASP.Net Core Web, .NET 6.0*|*FBT*|
 
 <br>
 
@@ -32,6 +53,8 @@ This Project is made to Train My skills in API, OAuth And OpenID
 
 
 <br>
+
+
 
 
 ### Technologies and prerequisites
