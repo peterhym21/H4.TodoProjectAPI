@@ -1,40 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using TodoWebClient.Pages.Models;
 using TodoWebClient.Pages.Services;
 
 namespace TodoWebClient.Pages.TodoPages
 {
-    public class GetTodosModel : PageModel
+    public class DeleteTodoModel : PageModel
     {
-
         private readonly ITodoService _todoService;
 
-        public GetTodosModel(ITodoService todoService)
+        public DeleteTodoModel(ITodoService todoService)
         {
             _todoService = todoService;
         }
-
-
-        [BindProperty(SupportsGet = true)]
-        public List<TodoItem> TodoItems { get; set; }
-
         [BindProperty(SupportsGet = true)]
         public TodoItem Todoitem { get; set; }
 
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(int TodoItemId)
         {
-            TodoItems = await _todoService.GetItemsAsync();
+            Todoitem = await _todoService.GetItemByIdAsync(TodoItemId);
             return Page();
         }
 
-
         public async Task<IActionResult> OnPost()
         {
-            Todoitem = await _todoService.CreateAsync(Todoitem);
+            await _todoService.Delete(Todoitem.Id);
             return RedirectToPage("/TodoPages/GetTodos");
         }
-
     }
 }

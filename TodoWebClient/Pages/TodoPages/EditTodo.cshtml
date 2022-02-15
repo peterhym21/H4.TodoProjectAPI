@@ -1,0 +1,33 @@
+﻿@page "{TodoItemId:int}"
+@model TodoWebClient.Pages.TodoPages.EditTodoModel
+
+<div class="col-12 text-center">
+    <h1>Confrim Deletion</h1>
+    <h4>Do you really want to delete:</h4>
+
+    <form method="post">
+        <h5>Id</h5>
+        <input type="number" readonly placeholder="@Model.Todoitem.Id" asp-for="@Model.Todoitem.Id" />
+        <h5>Name</h5>
+        <input type="text" placeholder="@Model.Todoitem.Name" asp-for="@Model.Todoitem.Name"></input>
+        <h5>Discription</h5>
+        <input type="text" placeholder="@Model.Todoitem.Description" asp-for="@Model.Todoitem.Description"></input>
+        <h5>Completed</h5>
+        <Input type="checkbox" value="@Model.Todoitem.Completed" asp-for="@Model.Todoitem.Completed"></Input>
+        <h5>Creatrion Time</h5>
+        <input type="text" readonly placeholder="@Model.Todoitem.CreatedTime"></input>
+        <h5>Priority</h5>
+        <select asp-for="@Model.Todoitem.Priority"
+                class="form-control">
+            <option>Select type ...</option>
+            <option value="0">High</option>
+            <option value="1">Normal</option>
+            <option value="2">Low</option>
+        </select>
+        <button type="submit" class="btn btn-danger">Edit</button>
+    </form>
+
+    <a class="btn btn-success" asp-page="/TodoPages/GetTodos">Back To List</a>
+
+
+</div>

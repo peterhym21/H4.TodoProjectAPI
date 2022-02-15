@@ -1,0 +1,32 @@
+﻿@page "{TodoItemId:int}"
+@model TodoWebClient.Pages.TodoPages.DeleteTodoModel
+
+<div class="col-12">
+    <h1>Confrim Deletion</h1>
+    <h4>Do you really want to delete:</h4>
+
+    <h5>Id</h5>
+    <label>@Model.Todoitem.Id</label>
+    <h5>Name</h5>
+    <label>@Model.Todoitem.Name</label>
+    <h5>Discription</h5>
+    <label>@Model.Todoitem.Description</label>
+    <h5>Completed</h5>
+    <Input type="checkbox" readonly value="@Model.Todoitem.Completed"></Input>
+    <h5>Creatrion Time</h5>
+    <label>@Model.Todoitem.CreatedTime</label>
+    <h5>Priority</h5>
+    <label>@Model.Todoitem.Priority</label>
+
+
+    <form method="post">
+        <input type="hidden" asp-for="@Model.Todoitem.Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+
+    <a class="btn btn-success" asp-page="/TodoPages/GetTodos">Back To List</a>
+
+
+</div>
+
+

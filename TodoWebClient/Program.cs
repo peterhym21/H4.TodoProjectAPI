@@ -7,6 +7,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<ITodoService, TodoService>();
 
+builder.Services.AddHttpClient<TodoService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

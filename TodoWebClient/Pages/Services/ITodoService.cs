@@ -11,5 +11,8 @@ namespace TodoWebClient.Pages.Services
     {
         public Task<List<TodoItem>> GetItemsAsync();
         public Task<TodoItem> CreateAsync(TodoItem todoItem);
+        public Task Delete(int id);
+        public Task<TodoItem> GetItemByIdAsync(int id);
+        public Task Update(int id, TodoItem todoItem);
     }
 }

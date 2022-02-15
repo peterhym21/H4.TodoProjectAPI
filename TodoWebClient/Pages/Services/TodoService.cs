@@ -13,21 +13,33 @@ namespace TodoWebClient.Pages.Services
         // .\Todo.WebAPI.exe --urls "http://*:4020"    Start API on Port 4020 localhost
         // C:\skole\eux\H4\FagligOpdatering\Todo.WebAPI\bin\Debug\net6.0
 
-        private static readonly HttpClient _httpClient = new HttpClient { BaseAddress = new Uri(AppConstants.BaseUrl) };
-        private readonly JsonSerializerOptions _options;
+        private readonly HttpClient _httpClient;
 
-        public TodoService()
+        public TodoService(HttpClient httpClient)
         {
-            _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri(AppConstants.BaseUrl);
         }
+
 
         public async Task<TodoItem> CreateAsync(TodoItem todoItem)
         {
             var response = await _httpClient.PostAsJsonAsync(AppConstants.TodoAPI, todoItem);
             response.EnsureSuccessStatusCode();
-            string content = await response.Content.ReadAsStringAsync();
-            TodoItem createdTodoItem = JsonSerializer.Deserialize<TodoItem>(content, _options);
+            TodoItem createdTodoItem = await response.Content.ReadFromJsonAsync<TodoItem>();
             return createdTodoItem;
+        }
+
+        public async Task Update(int id, TodoItem todoItem)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"{AppConstants.TodoAPI}/{id}", todoItem);
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task Delete(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"{AppConstants.TodoAPI}/{id}");
+            response.EnsureSuccessStatusCode();
         }
 
         public async Task<List<TodoItem>> GetItemsAsync()
@@ -36,5 +48,13 @@ namespace TodoWebClient.Pages.Services
 
             return items;
         }
+
+        public async Task<TodoItem> GetItemByIdAsync(int id)
+        {
+            TodoItem todoItem = await _httpClient.GetFromJsonAsync<TodoItem>($"{AppConstants.TodoAPI}/{id}");
+            return todoItem;
+        }
+
+
     }
 }
