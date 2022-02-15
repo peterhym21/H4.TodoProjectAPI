@@ -12,9 +12,7 @@ This Project is made to Train My skills in API, OAuth And OpenID
 
 |Project Name|Language|Folder Structure|
 |-|-|-|
-|*Todo.WebAPI*|* .Net 6.0*|*FBF*|
-|*Service*|*.Net 6.0*|*FBT*|
-|*Repository*|*.Net 6.0*|*FBT*| 
+|*TodoWebAPI*|* ASP.Net API 6.0*|*FBT*|
 
 <br>
 
