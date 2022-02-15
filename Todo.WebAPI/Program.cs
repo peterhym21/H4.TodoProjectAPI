@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Todo.WebAPI;
+using TodoWebAPI.Context;
+using TodoWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+//builder.Services.AddScoped<ITodoService, TodoService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -22,16 +25,16 @@ app.MapGet("/", () => "Hello World!");
 app.MapGet("/todoitems", async (TodoDb db) =>
     await db.Todos.Where(t => t.Completed == false).ToListAsync());
 
-app.MapGet("/todoitemsa/all", async (TodoDb db) =>
+app.MapGet("/todoitems/all", async (TodoDb db) =>
     await db.Todos.ToListAsync());
 
 app.MapGet("/todoitems/{id}", async (int id, TodoDb db) =>
     await db.Todos.FindAsync(id)
-        is Todo.WebAPI.Todo todo
+        is TodoWebAPI.Models.Todo todo
         ? Results.Ok(todo)
         : Results.NotFound());
 
-app.MapPost("/todoitems", async (Todo.WebAPI.Todo todo, TodoDb db) =>
+app.MapPost("/todoitems", async (TodoWebAPI.Models.Todo todo, TodoDb db) =>
 {
     db.Todos.Add(todo);
     await db.SaveChangesAsync();
@@ -39,7 +42,7 @@ app.MapPost("/todoitems", async (Todo.WebAPI.Todo todo, TodoDb db) =>
     return Results.Created($"/todoitems/{todo.Id}", todo);
 });
 
-app.MapPut("/todoitems/{id}", async (int id, Todo.WebAPI.Todo inputTodo, TodoDb db) =>
+app.MapPut("/todoitems/{id}", async (int id, TodoWebAPI.Models.Todo inputTodo, TodoDb db) =>
 {
     var todo = await db.Todos.FindAsync(id);
 
@@ -57,7 +60,7 @@ app.MapPut("/todoitems/{id}", async (int id, Todo.WebAPI.Todo inputTodo, TodoDb 
 
 app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
 {
-    if (await db.Todos.FindAsync(id) is Todo.WebAPI.Todo todo)
+    if (await db.Todos.FindAsync(id) is TodoWebAPI.Models.Todo todo)
     {
         db.Todos.Remove(todo);
         await db.SaveChangesAsync();

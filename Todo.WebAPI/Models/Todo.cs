@@ -1,4 +1,4 @@
-namespace Todo.WebAPI;
+namespace TodoWebAPI.Models;
 
 class Todo
 {
