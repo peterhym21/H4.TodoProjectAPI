@@ -1,0 +1,82 @@
+﻿@page
+@model GetTodosModel
+
+
+<h1>To do List</h1>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create ToDo</button>
+
+
+<div class="col-12">
+    <table class="table">
+        <tr>
+            <th>Completed</th>
+            <th>Name</th>
+            <th>Priority</th>
+            <th>Creation Time</th>
+            <th>Id</th>
+            <th>Discription</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        @if (Model.TodoItems is not null)
+        {
+            @foreach (var item in Model.TodoItems)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" value="@item.Completed">
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.Priority</td>
+                    <td>@item.CreatedTime</td>
+                    <td>@item.Id</td>
+                    <td>@item.Description</td>
+                    <td>
+                        <a class="btn btn-danger" asp-page="" asp-route-TodoId="@item.Id">Delete<i class="fas fa-circle-trash"></a>
+                    </td>
+                    <td>
+                        <a asp-page="" asp-route-TodoId="@item.Id"><button class="btn btn-success">Edit</button></a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<form method="post">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Create ToDo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" asp-for="@Model.Todoitem.Name" />
+                    <input type="text" asp-for="@Model.Todoitem.Description" />
+                    @*                    
+                        <select asp-for="@Model.Todoitem.Priority"
+                        class="form-control" asp-items="@Model.PrioritySelect">
+                        <option>Select type ...</option>
+                        </select>*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+

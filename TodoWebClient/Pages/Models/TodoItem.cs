@@ -1,6 +1,6 @@
-namespace TodoWebAPI.Models;
+namespace TodoWebClient.Pages.Models;
 
-public class Todo
+public class TodoItem
 {
     public int Id { get; set; }
     public string? Name { get; set; }
@@ -13,7 +13,7 @@ public class Todo
 
 public enum Priority
 {
-    Low,
+    High,
     Normal,
-    High
+    Low
 }
