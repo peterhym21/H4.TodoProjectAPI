@@ -8,7 +8,9 @@ namespace TodoWebClient.Pages.Services
 {
     public class AppConstants
     {
-        public static string BaseUrl = "http://localhost:4020/";
+        //https://localhost:7032/
+        //http://localhost:4020/
+        public static string BaseUrl = "https://localhost:7032/";
         public static string TodoAPI = "todoitems";
     }
 }
