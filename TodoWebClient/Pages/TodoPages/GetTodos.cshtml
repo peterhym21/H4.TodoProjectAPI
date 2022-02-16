@@ -26,7 +26,7 @@
             {
                 <tr>
                     <td>
-                        <input type="checkbox" value="@item.Completed">
+                        <input type="checkbox" value="@item.Completed" asp-for="@item.Completed" onclick="this.form.submit">
                     </td>
                     <td>@item.Name</td>
                     <td>@item.Priority</td>
@@ -34,10 +34,10 @@
                     <td>@item.Id</td>
                     <td>@item.Description</td>
                     <td>
-                        <a class="btn btn-danger" asp-page="/TodoPages/DeleteTodo" asp-route-TodoItemId="@item.Id">Delete<i class="fas fa-circle-trash"></a>
+                        <a class="btn btn-danger" asp-page="./DeleteTodo" asp-route-TodoItemId="@item.Id">Delete<i class="fas fa-circle-trash"></a>
                     </td>
                     <td>
-                        <a class="btn btn-success" asp-page="/TodoPages/EditTodo" asp-route-TodoItemId="@item.Id">Edit</a>
+                        <a class="btn btn-success" asp-page="./EditTodo" asp-route-TodoItemId="@item.Id">Edit</a>
                     </td>
                 </tr>
             }

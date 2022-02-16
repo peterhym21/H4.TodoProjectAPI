@@ -25,7 +25,7 @@ namespace TodoWebClient.Pages.TodoPages
         public async Task<IActionResult> OnPost()
         {
             await _todoService.Update(Todoitem.Id, Todoitem);
-            return RedirectToPage("/TodoPages/GetTodos");
+            return RedirectToPage("./GetTodos");
         }
     }
 }

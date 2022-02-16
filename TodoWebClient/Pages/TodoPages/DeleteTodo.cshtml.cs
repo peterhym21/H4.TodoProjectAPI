@@ -25,7 +25,7 @@ namespace TodoWebClient.Pages.TodoPages
         public async Task<IActionResult> OnPost()
         {
             await _todoService.Delete(Todoitem.Id);
-            return RedirectToPage("/TodoPages/GetTodos");
+            return RedirectToPage("./GetTodos");
         }
     }
 }

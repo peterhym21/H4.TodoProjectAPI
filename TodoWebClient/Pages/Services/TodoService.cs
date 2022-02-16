@@ -45,7 +45,6 @@ namespace TodoWebClient.Pages.Services
         public async Task<List<TodoItem>> GetItemsAsync()
         {
             List<TodoItem> items = await _httpClient.GetFromJsonAsync<List<TodoItem>>($"{AppConstants.TodoAPI}");
-
             return items;
         }
 
