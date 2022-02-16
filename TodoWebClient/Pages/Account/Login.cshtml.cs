@@ -10,6 +10,7 @@ namespace TodoWebClient.Pages.Account
         public async Task OnGet(string returnUrl = "/")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
+                .WithScope("openid profile email")
                 .WithRedirectUri(returnUrl)
                 .Build();
 

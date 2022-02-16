@@ -1,4 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using TodoWebAPI;
 using TodoWebAPI.Context;
 using TodoWebAPI.Services;
 
@@ -13,6 +18,28 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
 
+string domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = domain;
+        options.Audience = builder.Configuration["Auth0:Audience"];
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            NameClaimType = ClaimTypes.NameIdentifier
+        };
+    });
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("read:messages", policy => policy.Requirements.Add(new HasScopeRequirement("read:messages", domain)));
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
+
 
 var app = builder.Build();
 
@@ -23,7 +50,7 @@ var app = builder.Build();
 app.MapGet("/", () => "Hello World!");
 
 app.MapGet("/todoitems", async (TodoDb db) =>
-    await db.Todos.Where(t => t.Completed == false).ToListAsync());
+    await db.Todos.Where(t => t.Completed == false).ToListAsync()).RequireAuthorization();
 
 app.MapGet("/todoitems/all", async (TodoDb db) =>
     await db.Todos.ToListAsync());
@@ -32,7 +59,7 @@ app.MapGet("/todoitems/{id}", async (int id, TodoDb db) =>
     await db.Todos.FindAsync(id)
         is TodoWebAPI.Models.Todo todo
         ? Results.Ok(todo)
-        : Results.NotFound());
+        : Results.NotFound()).RequireAuthorization();
 
 app.MapPost("/todoitems", async (TodoWebAPI.Models.Todo todo, TodoDb db) =>
 {
@@ -40,7 +67,7 @@ app.MapPost("/todoitems", async (TodoWebAPI.Models.Todo todo, TodoDb db) =>
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{todo.Id}", todo);
-});
+}).RequireAuthorization();
 
 app.MapPut("/todoitems/{id}", async (int id, TodoWebAPI.Models.Todo inputTodo, TodoDb db) =>
 {
@@ -56,7 +83,7 @@ app.MapPut("/todoitems/{id}", async (int id, TodoWebAPI.Models.Todo inputTodo, T
     await db.SaveChangesAsync();
 
     return Results.NoContent();
-});
+}).RequireAuthorization();
 
 app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
 {
@@ -68,7 +95,7 @@ app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
     }
 
     return Results.NotFound();
-});
+}).RequireAuthorization();
 
 #endregion
 
@@ -87,6 +114,10 @@ app.UseCors(o => {
     o.AllowAnyHeader();
     o.AllowAnyMethod();
 });
+
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
 
