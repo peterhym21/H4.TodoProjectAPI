@@ -8,41 +8,43 @@
 
 
 <div class="col-12">
-    <table class="table">
-        <tr>
-            <th>Completed</th>
-            <th>Name</th>
-            <th>Priority</th>
-            <th>Creation Time</th>
-            <th>Id</th>
-            <th>Discription</th>
-            <th></th>
-            <th></th>
+    <form method="post" asp-page-handler="Checked">
+        <table class="table">
+            <tr>
+                <th>Completed</th>
+                <th>Name</th>
+                <th>Priority</th>
+                <th>Creation Time</th>
+                <th>Id</th>
+                <th>Discription</th>
+                <th></th>
+                <th></th>
 
-        </tr>
-        @if (Model.TodoItems is not null)
-        {
-            @foreach (var item in Model.TodoItems)
+            </tr>
+            @if (Model.TodoItems is not null)
             {
-                <tr>
-                    <td>
-                        <input type="checkbox" value="@item.Completed" asp-for="@item.Completed" onclick="this.form.submit">
-                    </td>
-                    <td>@item.Name</td>
-                    <td>@item.Priority</td>
-                    <td>@item.CreatedTime</td>
-                    <td>@item.Id</td>
-                    <td>@item.Description</td>
-                    <td>
-                        <a class="btn btn-danger" asp-page="./DeleteTodo" asp-route-TodoItemId="@item.Id">Delete<i class="fas fa-circle-trash"></a>
-                    </td>
-                    <td>
-                        <a class="btn btn-success" asp-page="./EditTodo" asp-route-TodoItemId="@item.Id">Edit</a>
-                    </td>
-                </tr>
+                @foreach (var item in Model.TodoItems)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="@item.Completed" asp-for="@item.Completed" onclick="this.form.submit">
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.Priority</td>
+                        <td>@item.CreatedTime</td>
+                        <td>@item.Id</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <a class="btn btn-danger" asp-page="./DeleteTodo" asp-route-TodoItemId="@item.Id">Delete<i class="fas fa-circle-trash"></a>
+                        </td>
+                        <td>
+                            <a class="btn btn-success" asp-page="./EditTodo" asp-route-TodoItemId="@item.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
             }
-        }
-    </table>
+        </table>
+    </form>
 </div>
 
 
@@ -60,22 +62,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label>Name:</label>
-                    <input type="text" asp-for="@Model.Todoitem.Name" />
-                    <br />
-                    <label>Discription:</label>
-                    <input type="text" asp-for="@Model.Todoitem.Description" />
-                    <br />
-                    <label>Priority:</label>
-                    <select asp-for="@Model.Todoitem.Priority"
-                            class="form-control">
-                        <option value="0" >High</option>
-                        <option value="1" >Normal</option>
-                        <option value="2" >Low</option>
-                    </select>
-                    <br />
-                    <label>Completed:</label>
-                    <input type="checkbox" asp-for="@Model.Todoitem.Completed">
+                    <div asp-validation-summary="ModelOnly">
+                        <label>Name:</label>
+                        <input type="text" asp-for="@Model.Todoitem.Name" />
+                        <br />
+                        <label>Discription:</label>
+                        <input type="text" asp-for="@Model.Todoitem.Description" />
+                        <br />
+                        <label>Priority:</label>
+                        <select asp-for="@Model.Todoitem.Priority"
+                                class="form-control">
+                            <option value="0">High</option>
+                            <option value="1">Normal</option>
+                            <option value="2">Low</option>
+                        </select>
+                        <br />
+                        <label>Completed:</label>
+                        <input type="checkbox" asp-for="@Model.Todoitem.Completed">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -85,7 +89,6 @@
         </div>
     </div>
 </form>
-
 
 
 
