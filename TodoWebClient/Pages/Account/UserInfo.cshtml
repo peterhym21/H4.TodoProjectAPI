@@ -1,4 +1,10 @@
 ﻿@page
 @model TodoWebClient.Pages.Account.UserInfoModel
-@{
-}
+
+<div>
+    <h1>@Model.GetUser.Name</h1>
+    <h2>@Model.GetUser.Email</h2>
+
+    <img src="@Model.GetUser.ProfileImage"/>
+
+</div>

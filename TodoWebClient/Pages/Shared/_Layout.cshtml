@@ -28,10 +28,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
+                        @if (User.Identity.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/UserInfo">User Info</a>
+                            </li>
+                        }
+
+                        <li class="nav-item allign-right text-right">
                             @if (User.Identity.IsAuthenticated == true)
                             {
-                                <a class="nav-link text-dark text-right" asp-area="" asp-page="/Account/Logout">Logout</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
                             }
                             else
                             {

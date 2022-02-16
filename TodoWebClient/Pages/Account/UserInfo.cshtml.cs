@@ -9,12 +9,14 @@ namespace TodoWebClient.Pages.Account
     [Authorize]
     public class UserInfoModel : PageModel
     {
+
+        [BindProperty(SupportsGet = true)]
+        public User GetUser { get; set; }
         public void OnGet()
         {
-            User user = new User();
-            user.Name = User.Identity.Name;
-            user.Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            user.ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
+            GetUser.Name = User.Identity.Name;
+            GetUser.Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            GetUser.ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
         }
     }
 }
