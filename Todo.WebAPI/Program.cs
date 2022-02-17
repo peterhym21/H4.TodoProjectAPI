@@ -33,9 +33,12 @@ builder.Services
     });
 
 
-builder.Services.AddAuthorization(options =>
+builder.Services.AddAuthorization(o =>
 {
-    //options.AddPolicy("read:messages", policy => policy.Requirements.Add(new HasScopeRequirement("read:messages", domain)));
+    o.AddPolicy("WritePolicy", p => p.RequireAuthenticatedUser().RequireClaim("permissions", "todo:write"));
+    o.AddPolicy("ReadPolicy", p => p.RequireAuthenticatedUser().RequireClaim("permissions", "todo:read")); 
+    o.AddPolicy("CreatePolicy", p => p.RequireAuthenticatedUser().RequireClaim("permissions", "todo:create"));
+    o.AddPolicy("DeletePolicy", p => p.RequireAuthenticatedUser().RequireClaim("permissions", "todo:delete"));
 });
 
 builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
@@ -50,16 +53,18 @@ var app = builder.Build();
 app.MapGet("/", () => "Hello World!");
 
 app.MapGet("/todoitems", async (TodoDb db) =>
-    await db.Todos.Where(t => t.Completed == false).ToListAsync()).RequireAuthorization();
+    await db.Todos.Where(t => t.Completed == false).ToListAsync()).RequireAuthorization("ReadPolicy");
 
 app.MapGet("/todoitems/all", async (TodoDb db) =>
-    await db.Todos.ToListAsync());
+    await db.Todos.ToListAsync()).RequireAuthorization("ReadPolicy");
 
 app.MapGet("/todoitems/{id}", async (int id, TodoDb db) =>
     await db.Todos.FindAsync(id)
         is TodoWebAPI.Models.Todo todo
         ? Results.Ok(todo)
-        : Results.NotFound()).RequireAuthorization();
+        : Results.NotFound()).RequireAuthorization("ReadPolicy");
+
+
 
 app.MapPost("/todoitems", async (TodoWebAPI.Models.Todo todo, TodoDb db) =>
 {
@@ -67,7 +72,9 @@ app.MapPost("/todoitems", async (TodoWebAPI.Models.Todo todo, TodoDb db) =>
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{todo.Id}", todo);
-}).RequireAuthorization();
+}).RequireAuthorization("CreatePolicy");
+
+
 
 app.MapPut("/todoitems/{id}", async (int id, TodoWebAPI.Models.Todo inputTodo, TodoDb db) =>
 {
@@ -83,7 +90,9 @@ app.MapPut("/todoitems/{id}", async (int id, TodoWebAPI.Models.Todo inputTodo, T
     await db.SaveChangesAsync();
 
     return Results.NoContent();
-}).RequireAuthorization();
+}).RequireAuthorization("WritePolicy");
+
+
 
 app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
 {
@@ -95,7 +104,7 @@ app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
     }
 
     return Results.NotFound();
-}).RequireAuthorization();
+}).RequireAuthorization("DeletePolicy");
 
 #endregion
 

@@ -12,9 +12,6 @@ namespace TodoWebClient.Pages.Services
 {
     public class TodoService : ITodoService
     {
-        // .\Todo.WebAPI.exe --urls "http://*:4020"    Start API on Port 4020 localhost
-        // C:\skole\eux\H4\FagligOpdatering\Todo.WebAPI\bin\Debug\net6.0
-
         private readonly HttpClient _httpClient; 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -22,7 +19,7 @@ namespace TodoWebClient.Pages.Services
         {
             _httpClient = httpClient;
             _httpContextAccessor = httpContextAccessor;
-            _httpClient.BaseAddress = new Uri(AppConstants.BaseUrl);
+            _httpClient.BaseAddress =  new Uri(AppConstants.BaseUrl);
         }
 
 
