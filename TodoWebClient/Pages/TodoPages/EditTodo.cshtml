@@ -13,7 +13,7 @@
         <h5>Discription</h5>
         <input type="text" placeholder="@Model.Todoitem.Description" asp-for="@Model.Todoitem.Description"></input>
         <h5>Completed</h5>
-        <Input type="checkbox" value="@Model.Todoitem.Completed" asp-for="@Model.Todoitem.Completed"></Input>
+        <Input type="checkbox" asp-for="@Model.Todoitem.Completed"></Input>
         <h5>Creatrion Time</h5>
         <input type="text" readonly placeholder="@Model.Todoitem.CreatedTime"></input>
         <h5>Priority</h5>
