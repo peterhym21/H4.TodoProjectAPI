@@ -12,6 +12,7 @@ namespace TodoWebClient.Pages.Account
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
                 .WithScope("openid profile email")
                 .WithRedirectUri(returnUrl)
+                .WithAudience("https://localhost:7032/")
                 .Build();
 
             await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);

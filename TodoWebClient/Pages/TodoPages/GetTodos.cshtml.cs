@@ -32,10 +32,8 @@ namespace TodoWebClient.Pages.TodoPages
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
-            {
-                Todoitem = await _todoService.CreateAsync(Todoitem);
-            }
+            Todoitem = await _todoService.CreateAsync(Todoitem);
+
             return RedirectToPage("./GetTodos");
         }
 

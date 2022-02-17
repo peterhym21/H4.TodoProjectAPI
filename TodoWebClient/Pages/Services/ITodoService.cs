@@ -13,6 +13,7 @@ namespace TodoWebClient.Pages.Services
         public Task<TodoItem> CreateAsync(TodoItem todoItem);
         public Task Delete(int id);
         public Task<TodoItem> GetItemByIdAsync(int id);
-        public Task Update(int id, TodoItem todoItem);
+        public Task Update(int id, TodoItem todoItem); 
+        public Task InitializeHttpClient();
     }
 }
