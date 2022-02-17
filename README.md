@@ -73,12 +73,21 @@ This Project is made to Train My skills in API, OAuth And OpenID
 ## Use of third party libraries
 
 
-### Todo.WebAPI
+### TodoWebAPI
 | Name                                                 | Version |
 | :--------------------------------------------------- | :------ |
+| Microsoft.AspNetCore.Authentication.JwtBearer        | 6.0.2   |
 | Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore | 6.0.2   |
 | Microsoft.EntityFrameworkCore.InMemory               | 6.0.2   |
 | Swashbuckle.AspNetCore                               | 6.2.3   |
+
+<br>
+
+
+### TodoWebClient
+| Name                            | Version |
+| :------------------------------ | :------ |
+| Auth0.AspNetCore.Authentication | 1.0.1   |
 
 
 <br>
