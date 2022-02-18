@@ -6,25 +6,46 @@
     <h4>Do you really want to delete:</h4>
 
     <form method="post">
-        <h5>Id</h5>
-        <input type="number" readonly placeholder="@Model.Todoitem.Id" asp-for="@Model.Todoitem.Id" />
-        <h5>Name</h5>
-        <input type="text" placeholder="@Model.Todoitem.Name" asp-for="@Model.Todoitem.Name"></input>
-        <h5>Discription</h5>
-        <input type="text" placeholder="@Model.Todoitem.Description" asp-for="@Model.Todoitem.Description"></input>
-        <h5>Completed</h5>
-        <Input type="checkbox" asp-for="@Model.Todoitem.Completed"></Input>
-        <h5>Creatrion Time</h5>
-        <input type="text" readonly placeholder="@Model.Todoitem.CreatedTime"></input>
-        <h5>Priority</h5>
-        <select asp-for="@Model.Todoitem.Priority"
-                class="form-control">
-            <option value="0">High</option>
-            <option value="1">Normal</option>
-            <option value="2">Low</option>
-        </select>
+        <div class="row">
+            <div class="col-6">
+                <h5>Id:</h5>
+                <input type="number" readonly placeholder="@Model.Todoitem.Id" asp-for="@Model.Todoitem.Id" />
+                <br />
+
+                <h5>Name:</h5>
+                <input type="text" asp-validation-for="@Model.Todoitem.Name" placeholder="@Model.Todoitem.Name" asp-for="@Model.Todoitem.Name"></input>
+
+                <br />
+
+                <h5>Discription:</h5>
+                <input type="text" placeholder="@Model.Todoitem.Description" asp-for="@Model.Todoitem.Description"></input>
+            </div>
+
+            <div class="col-6">
+                <h5>Creatrion Time</h5>
+                <input type="text" readonly placeholder="@Model.Todoitem.CreatedTime"></input>
+                <br />
+
+                <h5>Completed: </h5>
+                <Input type="checkbox" asp-for="@Model.Todoitem.Completed"></Input>
+                <br />
+
+                <h5>Priority: </h5>
+                <select asp-for="@Model.Todoitem.Priority" asp-validation-for="@Model.Todoitem.Priority"
+                        class="form-control">
+                    <option value="0">High</option>
+                    <option value="1">Normal</option>
+                    <option value="2">Low</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <br />
+
         <button type="submit" class="btn btn-danger">Edit</button>
     </form>
+
+    <br />
 
     <a class="btn btn-success" asp-page="./GetTodos">Back To List</a>
 

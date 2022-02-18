@@ -1,18 +1,25 @@
 ﻿@page
 @model TodoWebClient.Pages.Account.UserInfoModel
 
-<div>
-    <h2>Name: </h2>
-    <h3>@Model.GetUser.Name</h3>
-    <h2>Email: </h2>
-    <h3>@Model.GetUser.Email</h3>
-    <h2>ProfilePicture: </h2>
-    <img src="@Model.GetUser.ProfileImage"/>
-    <h2>Number: </h2>
-    <h3>@Model.GetUser.Phone</h3>
-    <h2>Date Of Birth: </h2>
-    <h3>@Model.GetUser.DateOfBirth</h3>
-    <h2>Gender: </h2>
-    <h3>@Model.GetUser.Gender</h3>
+<div class="row">
+    <div class="col-6">
+
+
+        <h2>Name: </h2>
+        <h3>@Model.GetUser.Name</h3>
+
+        <br />
+
+        <h2>ProfilePicture: </h2>
+        <img src="@Model.GetUser.ProfileImage" />
+
+    </div>
+
+    <div class="col-6">
+
+        <h2>Email: </h2>
+        <h3>@Model.GetUser.Email</h3>
+
+    </div>
 
 </div>

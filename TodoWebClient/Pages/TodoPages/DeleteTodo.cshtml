@@ -5,25 +5,42 @@
     <h1>Confrim Deletion</h1>
     <h4>Do you really want to delete:</h4>
 
-    <h5>Id</h5>
-    <label>@Model.Todoitem.Id</label>
-    <h5>Name</h5>
-    <label>@Model.Todoitem.Name</label>
-    <h5>Discription</h5>
-    <label>@Model.Todoitem.Description</label>
-    <h5>Completed</h5>
-    <Input type="checkbox" readonly value="@Model.Todoitem.Completed"></Input>
-    <h5>Creatrion Time</h5>
-    <label>@Model.Todoitem.CreatedTime</label>
-    <h5>Priority</h5>
-    <label>@Model.Todoitem.Priority</label>
+    <div class="row">
+        <div class="col-6">
+            <h5>Id:</h5>
+            <label>@Model.Todoitem.Id</label>
+            <br />
 
+            <h5>Name:</h5>
+            <label>@Model.Todoitem.Name</label>
+            <br />
+
+            <h5>Discription:</h5>
+            <label>@Model.Todoitem.Description</label>
+        </div>
+
+        <div class="col-6">
+            <h5>Creatrion Time</h5>
+            <label>@Model.Todoitem.CreatedTime</label>
+            <br />
+
+            <h5>Completed: </h5>
+            <Input type="checkbox" readonly value="@Model.Todoitem.Completed"></Input>
+            <br />
+
+            <h5>Priority: </h5>
+            <label>@Model.Todoitem.Priority</label>
+
+        </div>
+    </div>
+    <br />
 
     <form method="post">
         <input type="hidden" asp-for="@Model.Todoitem.Id" />
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 
+    <br />
     <a class="btn btn-success" asp-page="./GetTodos">Back To List</a>
 
 

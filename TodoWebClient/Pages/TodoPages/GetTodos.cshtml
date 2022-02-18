@@ -62,19 +62,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label>Name:</label>
-                    <input type="text" asp-for="@Model.Todoitem.Name" />
+                    <div>
+                        <label>Name:</label>
+                        <input type="text" data-val="true" asp-validation-for="@Model.Todoitem.Name" asp-for="@Model.Todoitem.Name" id="Name"
+                               data-val-required="The Name is a required field." />
+                        <span asp-validation-for="@Model.Todoitem.Priority" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+
+                    </div>
                     <br />
                     <label>Discription:</label>
                     <input type="text" asp-for="@Model.Todoitem.Description" />
                     <br />
-                    <label>Priority:</label>
-                    <select asp-for="@Model.Todoitem.Priority"
-                            class="form-control">
-                        <option value="0">High</option>
-                        <option value="1">Normal</option>
-                        <option value="2">Low</option>
-                    </select>
+                    <div>
+                        <label>Priority:</label>
+                        <select asp-for="@Model.Todoitem.Priority" id="Prioraty" data-val="true" data-val-required="The Priority is a required field."
+                                class="form-control">
+                            <option value="0">High</option>
+                            <option value="1">Normal</option>
+                            <option value="2">Low</option>
+                        </select>
+                        <span asp-validation-for="@Model.Todoitem.Priority" data-valmsg-for="Prioraty" data-valmsg-replace="true"></span>
+
+                    </div>
+
                     <br />
                     <label>Completed:</label>
                     <input type="checkbox" asp-for="@Model.Todoitem.Completed">
@@ -89,4 +99,6 @@
 </form>
 
 
-
+@section scripts{
+<partial name="_ValidationScriptsPartial" />
+}
