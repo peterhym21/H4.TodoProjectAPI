@@ -13,12 +13,20 @@
         <h2>ProfilePicture: </h2>
         <img src="@Model.GetUser.ProfileImage" />
 
+        <br/>
+        <h2>Email: </h2>
+        <h3>@Model.GetUser.Email</h3>
+
     </div>
 
     <div class="col-6">
 
-        <h2>Email: </h2>
-        <h3>@Model.GetUser.Email</h3>
+        <br/>
+        <h2>Expiration: </h2>
+        <h3>@Model.GetUser.Expiration</h3>
+        <br/>
+        <h2>Authentication: </h2>
+        <h3>@Model.GetUser.Authentication</h3>
 
     </div>
 

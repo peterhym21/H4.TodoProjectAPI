@@ -16,10 +16,9 @@ namespace TodoWebClient.Pages.Account
         {
             GetUser.Name = User.Identity.Name;
             GetUser.Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            GetUser.DateOfBirth = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.DateOfBirth)?.Value;
-            GetUser.Gender = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Gender)?.Value;
-            GetUser.Phone = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.MobilePhone)?.Value;
             GetUser.ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
+            GetUser.Expiration = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Expiration)?.Value;
+            GetUser.Authentication = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Authentication)?.Value;
         }
     }
 }
